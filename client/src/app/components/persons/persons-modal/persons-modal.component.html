@@ -1,0 +1,79 @@
+<form [formGroup]="personsForm" #localForm="ngForm" novalidate (ngSubmit)="submit()">
+
+  <div class='modal-header'>
+    <h4 class='modal-title'>{{id_person ? 'Modificare' : 'Adăugare'}} persoana</h4>
+  </div>
+
+    <div class='modal-body'>
+      <div class='form-group'>
+        <div class='row'>
+          <label class='col-2 control-label'>Nume*</label>
+          <div class='col-9'>
+            <input [(ngModel)]='modal.name' formControlName="name" class='form-control' placeholder='Nume...' maxlength='255' required 
+             [class.is-invalid]="localForm.submitted && personsForm.get('name')?.invalid"/>
+                <div class="invalid-feedback">
+                  Numele este obligatoriu.
+                </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class='form-group'>
+        <div class='row'>
+          <label class='col-2 control-label'>Prenume*</label>
+          <div class='col-9'>
+            <input [(ngModel)]='modal.surname' formControlName="surname" class='form-control' placeholder='Prenume...' maxlength='255' required 
+              [class.is-invalid]="localForm.submitted && personsForm.get('surname')?.invalid"/>
+              <div class="invalid-feedback">
+                Prenumele este obligatoriu.
+              </div>
+        </div>
+        </div>
+      </div>
+      
+      <div class='form-group'>
+        <div class='row'>
+          <label class='col-2 control-label'>CNP*</label>
+          <div class='col-9'>
+            <input [(ngModel)]='modal.cnp' formControlName="cnp" class='form-control' placeholder='CNP...' maxlength='13' required 
+              [class.is-invalid]="localForm.submitted && personsForm.get('cnp')?.invalid"/>
+              <div class="invalid-feedback">
+                CNP este obligatoriu.
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class='form-group'>
+        <div class='row'>
+          <label class='col-2 control-label'>Masini*</label>
+          <div class='col-9'>
+            <!-- <ng-select [multiple]="true" [(ngModel)]='modal.cars' formControlName="cars" required seleccted="false"
+            [class.is-invalid]="localForm.submitted && personsForm.get('cars')?.invalid" 
+            >
+              <ng-option *ngFor='let car of modal.cars' 
+                [value]="car.id">{{car.brand}}  -  {{car.model}}
+              </ng-option>
+            </ng-select> -->
+            <ng-select [multiple]="true" placeholder="Masina..." [(ngModel)]='modal.cars' 
+              formControlName="cars" required [class.is-invalid]="localForm.submitted && personsForm.get('cars')?.invalid" 
+            >
+              <ng-option *ngFor='let car of modal.cars'  
+                [value]="car.id">{{car.brand}}  -  {{car.model}}
+              </ng-option>
+          </ng-select>
+          <div class="invalid-feedback">
+                Masini - camp obligatoriu.
+              </div>
+          </div><br><br><br><br><br>
+        </div>
+      </div>
+
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-outline-dark' (click)='activeModal.dismiss()'>Renunță</button>
+        <button type='submit' class='btn btn-success'>Salvează</button>
+      </div>
+
+    </div>
+
+</form>

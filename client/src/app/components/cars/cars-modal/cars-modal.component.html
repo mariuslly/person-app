@@ -1,0 +1,59 @@
+<form [formGroup]="carsForm" #localForm="ngForm" novalidate (ngSubmit)="submit()">
+
+<div class='modal-header'>
+    <h4 class='modal-title'>{{id_car ? 'Modificare' : 'Adăugare'}} masina</h4>
+  </div>
+  
+  <div class='modal-body'>
+    <div class='row'>
+        <label class='col-2 control-label'>Denumire marca*</label>
+        <div class='col-9'>
+          <input [(ngModel)]='modal.brand' formControlName='brand' class='form-control' placeholder='Denumire marca...' maxlength='255' required 
+          [class.is-invalid]="localForm.submitted && carsForm.get('brand')?.invalid"/>
+             <div class="invalid-feedback">
+               Marca este obligatorie.
+             </div>
+        </div>
+      </div>
+    
+      <div class='row'>
+        <label class='col-2 control-label'>Denumire model*</label>
+        <div class='col-9'>
+          <input [(ngModel)]='modal.model' formControlName='model' class='form-control' placeholder='Denumire model...' maxlength='255' required 
+          [class.is-invalid]="localForm.submitted && carsForm.get('model')?.invalid"/>
+             <div class="invalid-feedback">
+               Modelul este obligatoriu.
+             </div>
+        </div>
+      </div>
+    
+      <div class='row'>
+        <label class='col-2 control-label'>Anul fabricatiei*</label>
+        <div class='col-9'>
+          <input type="number" [(ngModel)]='modal.manufacturing_year' formControlName='manufacturing_year' class='form-control' placeholder='Anul fabricatiei...' required 
+          [class.is-invalid]="localForm.submitted && carsForm.get('manufacturing_year')?.invalid" min="1970" max="2030"/>
+             <div class="invalid-feedback">
+               Anul fabricatiei este obligatoriu.
+             </div>
+        </div>
+      </div>
+
+      <div class='row'>
+        <label class='col-2 control-label'>Capacitatea cilindrica*</label>
+        <div class='col-9'>
+          <input type="number" [(ngModel)]='modal.cylindrical_capacity' formControlName='cylindrical_capacity' class='form-control' placeholder='Capacitatea cilindrica...' maxlength='255' required 
+          [class.is-invalid]="localForm.submitted && carsForm.get('cylindrical_capacity')?.invalid" max="9999" maxlength='4' />
+             <div class="invalid-feedback">
+               Capacitatea cilindrica este obligatorie.
+             </div>
+        </div>
+      </div>
+
+  </div>
+  
+  <div class='modal-footer'>
+    <button type='button' class='btn btn-outline-dark' (click)='activeModal.dismiss()'>Renunță</button>
+    <button type='submit' class='btn btn-success'>Salvează</button>
+  </div>
+
+</form>
